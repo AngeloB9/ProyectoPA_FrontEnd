@@ -8,40 +8,44 @@ import AdminLayout from 'componentes/Layouts/AdminLayout';
 import ModalSuccess from '@/componentes/Modales/ModalSuccess';
 import ModalError from 'componentes/Modales/ModalError';
 
-export const getServerSideProps = async ({}) => {
+export const getServerSideProps = async ({ query: { id } }) => {
   const { data: empleados } = await axios.get(
     `${process.env.NEXT_PUBLIC_APIURL}/empleado`
   );
   const { data: categorias } = await axios.get(
     `${process.env.NEXT_PUBLIC_APIURL}/categoria`
   );
-  //console.log(params);
+
+  const { data: clientes } = await axios.get(
+    `${process.env.NEXT_PUBLIC_APIURL}/cliente`
+  );
+
+  const { data: ticket } = await axios.get(
+    `${process.env.NEXT_PUBLIC_APIURL}/ticket/${id}`
+  );
 
   return {
     props: {
       empleados,
       categorias,
+      clientes,
+      ticket,
     },
   };
 };
-const index = (empleados, categorias) => {
+const index = ({ empleados, categorias, clientes, ticket }) => {
   const [loading, setloading] = useState(false);
   const [error, seterror] = useState(null);
   const [modalSuccess, setmodalSuccess] = useState(false); //modal de éxito
   const [modalError, setmodalError] = useState(false); //modal de error
-  const [clientesQuery, setclientesQuerys] = useState('');
-  const [clientesResults, setclientesResults] = useState([]);
+
   const router = useRouter();
-  //const { data: cliente } = await axios.get(`cliente`);
-  useMemo(() => {
-    if (clientesQuery.trim().length == 0) setclientesResults([]);
-  }, [clientesQuery]);
 
   const handleSubmit = async (values) => {
     setloading(true);
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_APIURL}/ticket`,
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_APIURL}/ticket/${values.TIKID}`,
         values
       );
 
@@ -53,58 +57,13 @@ const index = (empleados, categorias) => {
     }
   };
 
-  const handleSearchCliente = async () => {
-    if (clientesQuery.trim()) {
-      setloading(true);
-      try {
-        const { data: clientes } = await axios.get(
-          `${process.env.NEXT_PUBLIC_APIURL}/cliente/${clientesQuery}`
-        );
-        setclientesResults([clientes]);
-
-        setloading(false);
-      } catch (error) {
-        seterror(error);
-        setloading(false);
-      }
-    } else {
-      setclientesResults([]);
-    }
-  };
-
-  //Busca el cliente por Enter
-  const handleSearchClienteKey = async (event) => {
-    if (event.key === 'Enter') {
-      if (clientesQuery.trim()) {
-        setloading(true);
-        try {
-          const { data: clientes } = await axios.get(
-            `${process.env.NEXT_PUBLIC_APIURL}/cliente/${clientesQuery}`
-          );
-          setclientesResults([clientes]);
-
-          setloading(false);
-        } catch (error) {
-          seterror(error);
-          setloading(false);
-        }
-      } else {
-        setclientesResults([]);
-      }
-    }
-  };
-
   return (
     <AdminLayout>
       {loading && <LinearProgress />}
       <EditarTicket
         handleSubmit={handleSubmit}
-        handleSearchCliente={handleSearchCliente}
-        handleSearchClienteKey={handleSearchClienteKey}
-        handleChangeClientesQuery={(event) => {
-          setclientesQuerys(String(event.target.value));
-        }}
-        clientesResults={clientesResults}
+        clientes={clientes}
+        ticket={ticket}
         empleados={empleados}
         categorias={categorias}
       />

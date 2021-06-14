@@ -13,26 +13,51 @@ const StyledListItem = styled(ListGroup.Item)`
 `;
 const schema = yup.object().shape({
   TIKID: yup.number().required('Campo requerido'),
-  TIKTITULO: yup.string().trim().required('Campo requerido'),
-  TIKDESCRIPCION: yup.string().trim().required('Campo requerido'),
-  TIKESTADO: yup.string(),
+  TIKTITULO: yup.string().required('Campo requerido'),
+  TIKDESCRIPCION: yup.string().required('Campo requerido'),
+  //   TIKESTADO: yup.string().required('Campo requerido'),
+  cliente_buscar: yup.number().required('Campo requerido'),
 });
 
-const CrearTicket = ({ handleSubmit, empleados, categorias, clientes }) => {
+const CrearTicket = ({
+  handleSubmit,
+  handleSearchCliente,
+  clientesResults,
+  handleChangeClientesQuery,
+  handleSearchClienteKey,
+  empleados,
+  categorias,
+}) => {
+  const [clienteSelect, setclienteSelect] = useState('');
+  const [clienteid, setclienteid] = useState('');
   return (
     <div className='p-4'>
       <Formik
         validationSchema={schema}
         onSubmit={(values) => {
-          handleSubmit(values);
+          handleSubmit({
+            TIKID: values.TIKID,
+            CLIID: clienteid,
+            EMPID: values.EMPID,
+            CATID: values.CATID,
+            TIKTITULO: values.TIKTITULO,
+            TIKDESCRIPCION: values.TIKDESCRIPCION,
+            TIKFECHA: values.TIKFECHA,
+            TIKESTADO: values.TIKESTADO,
+          });
         }}
         initialValues={{
-          CLIID: clientes[0].CLIID,
           EMPID: empleados[0].EMPID,
-          CATID: categorias[0].CATID,
         }}>
         {({ handleSubmit, handleChange, errors }) => (
-          <Form onSubmit={handleSubmit} onChange={handleChange}>
+          <Form
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault();
+              }
+            }}>
             <Row>
               <Col sm='4'>
                 <Form.Label>Id:</Form.Label>
@@ -48,18 +73,53 @@ const CrearTicket = ({ handleSubmit, empleados, categorias, clientes }) => {
               </Col>
 
               <Col sm='4'>
-                <Form.Group sm='6' controlId='medico-select'>
-                  <Form.Label>Clientes:</Form.Label>
-                  <Form.Control as='select' name='CLIID'>
-                    {clientes.map((cliente) => (
-                      <option
+                <Form.Label>Buscar Cliente:</Form.Label>
+                <div className='d-flex'>
+                  <Form.Control
+                    name='cliente_buscar'
+                    type='number'
+                    placeholder='Cédula'
+                    onChange={handleChangeClientesQuery}
+                    onKeyDown={handleSearchClienteKey}
+                  />
+                  <Button onClick={handleSearchCliente}>
+                    <PageviewIcon></PageviewIcon>
+                  </Button>
+                </div>
+                {/* <Form.Control
+                  name='CLIID'
+                  type='text'
+                  placeholder='Cliente ID'
+                  isInvalid={errors.CLIID}
+                /> */}
+                <ListGroup variant='flush'>
+                  {clientesResults.length > 0 ? (
+                    clientesResults.map((cliente) => (
+                      <StyledListItem
                         key={cliente.CLIID}
-                        value={
-                          cliente.CLIID
-                        }>{`${cliente.CLINOMBRES.toString().trim()} ${cliente.CLIAPELLIDOS.toString().trim()}`}</option>
-                    ))}
-                  </Form.Control>
-                </Form.Group>
+                        onClick={() => {
+                          setclienteid(cliente.CLIID);
+                          setclienteSelect(
+                            `${cliente.CLINOMBRES.toString().trim()} ${cliente.CLIAPELLIDOS.toString().trim()}`
+                          );
+                        }}>
+                        {`${cliente.CLINOMBRES} ${cliente.CLIAPELLIDOS}`}
+                      </StyledListItem>
+                    ))
+                  ) : (
+                    <ListGroup.Item>No hay resultados</ListGroup.Item>
+                  )}
+                </ListGroup>
+              </Col>
+              <Col sm='4'>
+                <Form.Label>Cliente:</Form.Label>
+                <Form.Control
+                  name='cliente_select'
+                  type='text'
+                  disabled
+                  placeholder=''
+                  value={clienteSelect}
+                />
               </Col>
             </Row>
             <Row>
@@ -97,7 +157,6 @@ const CrearTicket = ({ handleSubmit, empleados, categorias, clientes }) => {
                 <Form.Control
                   name='TIKTITULO'
                   type='text'
-                  required
                   placeholder='Titulo del Ticket'
                   isInvalid={errors.TIKTITULO}
                 />
@@ -121,10 +180,16 @@ const CrearTicket = ({ handleSubmit, empleados, categorias, clientes }) => {
               </Col>
               <Col sm='4'>
                 <Form.Label>Fecha:</Form.Label>
-                <Form.Control name='TIKFECHA' type='date' required />
+                <Form.Control
+                  name='TIKFECHA'
+                  type='date'
+                  //min={new Date().toISOString().split('T')[0]}
+                  min='2021-06-14'
+                  required
+                />
               </Col>
               <Col sm='4'>
-                <Form.Label>Estado:</Form.Label>
+                {/* <Form.Label>Estado:</Form.Label>
                 <Form.Control
                   name='TIKESTADO'
                   type='text'
@@ -133,7 +198,15 @@ const CrearTicket = ({ handleSubmit, empleados, categorias, clientes }) => {
                 />
                 <Form.Control.Feedback type='invalid'>
                   {errors.TIKESTADO}
-                </Form.Control.Feedback>
+                </Form.Control.Feedback> */}
+                <Form.Group sm='6' controlId='categoria-select'>
+                  <Form.Label>Estado:</Form.Label>
+                  <Form.Control as='select' name='TIKESTADO'>
+                    <option>Finalizado</option>
+                    <option>En Proceso</option>
+                    <option>Cancelado</option>
+                  </Form.Control>
+                </Form.Group>
               </Col>
             </Row>
 
