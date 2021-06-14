@@ -59,7 +59,7 @@ const EditarEmpleado = ({ handleSubmit, empleado }) => {
                   name='EMPNOMBRES'
                   type='text'
                   onChange={handleChange}
-                  value={values.EMPNOMBRES}
+                  value={values.EMPNOMBRES.split('  ')[0]}
                   isInvalid={errors.EMPNOMBRES}
                 />
                 <Form.Control.Feedback type='invalid'>
@@ -73,7 +73,7 @@ const EditarEmpleado = ({ handleSubmit, empleado }) => {
                   name='EMPAPELLIDOS'
                   type='text'
                   onChange={handleChange}
-                  value={values.EMPAPELLIDOS}
+                  value={values.EMPAPELLIDOS.split('  ')[0]}
                   isInvalid={errors.EMPAPELLIDOS}
                 />
                 <Form.Control.Feedback type='invalid'>
@@ -87,7 +87,7 @@ const EditarEmpleado = ({ handleSubmit, empleado }) => {
                 <Form.Control
                   name='EMPFECHANACIMIENTO'
                   type='date'
-                  //min='1910-01-01'
+                  min='1910-01-01'
                   onChange={handleChange}
                   value={values.EMPFECHANACIMIENTO.split('T')[0]}
                   required
@@ -130,7 +130,7 @@ const EditarEmpleado = ({ handleSubmit, empleado }) => {
                   name='EMPDIRECCION'
                   type='text'
                   onChange={handleChange}
-                  value={values.EMPDIRECCION}
+                  value={values.EMPDIRECCION.split('  ')[0]}
                   isInvalid={errors.EMPDIRECCION}
                 />
                 <Form.Control.Feedback type='invalid'>

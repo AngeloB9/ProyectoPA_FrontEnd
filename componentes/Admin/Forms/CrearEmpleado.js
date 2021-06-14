@@ -14,13 +14,11 @@ const schema = yup.object().shape({
     .required('Campo requerido'),
   EMPAPELLIDOS: yup
     .string()
-    .trim()
     .matches(/^[aA-zZ\s]+$/, 'Por favor ingrese solo letras')
     .required('Campo requerido'),
   EMPCORREO: yup.string().email('Correo inválido').required('Campo requerido'),
   EMPCELULAR: yup
     .string()
-    .trim()
     .matches(/^09[0-9]{8}$/i, 'Formato incorrecto (ej: 0991234567)')
     .required('Campo requerido'),
   EMPDIRECCION: yup.string().optional(),
@@ -43,7 +41,7 @@ const CrearEmpleado = ({ handleSubmit }) => {
                   <Form.Label>Id:</Form.Label>
                   <Form.Control
                     name='EMPID'
-                    type='text'
+                    type='number'
                     placeholder='id'
                     isInvalid={errors.EMPID}
                   />
@@ -91,6 +89,8 @@ const CrearEmpleado = ({ handleSubmit }) => {
                   <Form.Control
                     name='EMPFECHANACIMIENTO'
                     type='date'
+                    min='1910-01-01'
+                    max={new Date().toISOString().split('T')[0]}
                     required
                   />
                 </Form.Group>
