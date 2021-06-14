@@ -66,15 +66,15 @@ const Feature = () => {
     {
       id: 1,
       img: './images/business-profit.png',
-      title: 'Estado de tus Tickets',
-      desc: 'Consulta el estado de los tickets asignados para ti',
+      title: 'Tickets',
+      desc: 'Es el proceso principal del sistema, permite registrar los tickets solicitados por un cliente, mismo que es asignado a un empleado con un respectiva categoría',
       link: '/',
     },
     {
       id: 2,
       img: './images/knowledge-thumb.png',
       title: 'Administración de Clientes ',
-      desc: 'Ticket PA permite la administración de clientes',
+      desc: 'Ticket PA permite llevar un registro de los clientes',
       link: '/',
     },
     {
@@ -82,6 +82,13 @@ const Feature = () => {
       img: './images/Group Members.png',
       title: 'Administración de Empleados',
       desc: 'Ticket PA permite la administración de empleados.',
+      link: '/',
+    },
+    {
+      id: 4,
+      img: './images/business-profit.png',
+      title: 'Administración de Categorías',
+      desc: 'Ticket PA permite la administración de categorías.',
       link: '/',
     },
   ];

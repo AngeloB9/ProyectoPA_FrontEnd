@@ -45,18 +45,18 @@ class Prueba extends Component {
                   <a
                     className='footLink text-reset text-decoration-none'
                     target='_blank'
-                    href='https://www.instagram.com'
+                    href='https://www.linkedin.com/in/angelo-benavidez-740874136/'
                     rel='noopener noreferrer'>
-                    <InstagramIcon style={{ fontSize: 45 }} />
+                    <LinkedInIcon style={{ fontSize: 45 }} />
                   </a>
                 </td>
                 <td className='footiconF'>
                   <a
                     className='footLink text-reset text-decoration-none'
                     target='_blank'
-                    href='https://www.linkedin.com'
+                    href='https://www.instagram.com'
                     rel='noopener noreferrer'></a>
-                  <LinkedInIcon style={{ fontSize: 45 }} />
+                  <InstagramIcon style={{ fontSize: 45 }} />
                 </td>
                 <td className='footiconF'>
                   <a

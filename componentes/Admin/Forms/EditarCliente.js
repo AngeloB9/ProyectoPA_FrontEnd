@@ -36,6 +36,7 @@ const EditarCliente = ({ handleSubmit, cliente }) => {
                   name='CLIID'
                   type='text'
                   //edit='false'
+
                   onChange={handleChange}
                   value={values.CLIID}
                   isInvalid={errors.CLIID}
