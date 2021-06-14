@@ -142,6 +142,7 @@ const EditarTicket = ({
                 <Form.Control
                   name='TIKFECHA'
                   type='date'
+                  min={new Date().toISOString().split('T')[0]}
                   value={values.TIKFECHA.split('T')[0]}
                   onChange={handleChange}
                   required
@@ -153,7 +154,7 @@ const EditarTicket = ({
                   name='TIKESTADO'
                   type='text'
                   placeholder='Estado del Ticket'
-                  value={values.TIKESTADO}
+                  value={values.TIKESTADO.trim()}
                   onChange={handleChange}
                   isInvalid={errors.TIKESTADO}
                 />

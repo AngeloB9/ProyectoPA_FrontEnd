@@ -15,7 +15,7 @@ const schema = yup.object().shape({
   TIKID: yup.number().required('Campo requerido'),
   TIKTITULO: yup.string().trim().required('Campo requerido'),
   TIKDESCRIPCION: yup.string().trim().required('Campo requerido'),
-  TIKESTADO: yup.string(),
+  TIKESTADO: yup.string().required('Completa el campo'),
 });
 
 const CrearTicket = ({ handleSubmit, empleados, categorias, clientes }) => {
@@ -121,7 +121,13 @@ const CrearTicket = ({ handleSubmit, empleados, categorias, clientes }) => {
               </Col>
               <Col sm='4'>
                 <Form.Label>Fecha:</Form.Label>
-                <Form.Control name='TIKFECHA' type='date' required />
+                <Form.Control
+                  name='TIKFECHA'
+                  type='date'
+                  min={new Date().toISOString().split('T')[0]}
+                  //min='2021-06-14'
+                  required
+                />
               </Col>
               <Col sm='4'>
                 <Form.Label>Estado:</Form.Label>

@@ -12,7 +12,7 @@ const schema = yup.object().shape({
   CLICORREO: yup.string().email('Correo inválido').required('Campo requerido'),
   CLICELULAR: yup
     .string()
-    .matches(/^09[8|9]{1}[0-9]{7}$/i, 'Formato incorrecto (ej: 0991234567)')
+    .matches(/^09[0-9]{8}$/i, 'Formato incorrecto (ej: 0991234567)')
     .required('Campo requerido'),
   CLIDIRECCION: yup.string().optional(),
 });
@@ -35,7 +35,7 @@ const EditarCliente = ({ handleSubmit, cliente }) => {
                 <Form.Control
                   name='CLIID'
                   type='text'
-                  edit='false'
+                  //edit='false'
                   onChange={handleChange}
                   value={values.CLIID}
                   isInvalid={errors.CLIID}
@@ -50,9 +50,8 @@ const EditarCliente = ({ handleSubmit, cliente }) => {
                 <Form.Control
                   name='CLINOMBRES'
                   type='text'
-                  edit='false'
                   onChange={handleChange}
-                  value={values.CLINOMBRES}
+                  value={values.CLINOMBRES.split('  ')[0]}
                   isInvalid={errors.CLINOMBRES}
                 />
                 <Form.Control.Feedback type='invalid'>
@@ -65,9 +64,8 @@ const EditarCliente = ({ handleSubmit, cliente }) => {
                 <Form.Control
                   name='CLIAPELLIDOS'
                   type='text'
-                  edit='false'
                   onChange={handleChange}
-                  value={values.CLIAPELLIDOS}
+                  value={values.CLIAPELLIDOS.split('  ')[0]}
                   isInvalid={errors.CLIAPELLIDOS}
                 />
                 <Form.Control.Feedback type='invalid'>
@@ -82,9 +80,8 @@ const EditarCliente = ({ handleSubmit, cliente }) => {
                 <Form.Control
                   name='CLIDIRECCION'
                   type='text'
-                  edit='false'
                   onChange={handleChange}
-                  value={values.CLIDIRECCION}
+                  value={values.CLIDIRECCION.split('  ')[0]}
                   isInvalid={errors.CLIDIRECCION}
                 />
                 <Form.Control.Feedback type='invalid'>
@@ -96,9 +93,8 @@ const EditarCliente = ({ handleSubmit, cliente }) => {
                 <Form.Control
                   name='CLICELULAR'
                   type='text'
-                  edit='false'
                   onChange={handleChange}
-                  value={values.CLICELULAR}
+                  value={values.CLICELULAR.split(' ')[0]}
                   isInvalid={errors.CLICELULAR}
                 />
                 <Form.Control.Feedback type='invalid'>
@@ -110,10 +106,9 @@ const EditarCliente = ({ handleSubmit, cliente }) => {
                 <Form.Label>Correo:</Form.Label>
                 <Form.Control
                   name='CLICORREO'
-                  type='text'
-                  edit='false'
+                  type='email'
                   onChange={handleChange}
-                  value={values.CLICORREO}
+                  value={values.CLICORREO.split(' ')[0]}
                   isInvalid={errors.CLICORREO}
                 />
                 <Form.Control.Feedback type='invalid'>

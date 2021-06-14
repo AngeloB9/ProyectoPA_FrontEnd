@@ -32,6 +32,7 @@ const EditarCategoria = ({ handleSubmit, categoria }) => {
                 <Form.Control
                   name='CATID'
                   onChange={handleChange}
+                  disabled
                   value={values.CATID}
                   isInvalid={errors.CATID}
                 />
@@ -46,7 +47,7 @@ const EditarCategoria = ({ handleSubmit, categoria }) => {
                   name='CATNOMBRE'
                   type='text'
                   onChange={handleChange}
-                  value={values.CATNOMBRE}
+                  value={values.CATNOMBRE.trim()}
                   isInvalid={errors.CATNOMBRE}
                 />
                 <Form.Control.Feedback type='invalid'>
@@ -60,7 +61,7 @@ const EditarCategoria = ({ handleSubmit, categoria }) => {
                   name='CATDESCRIPCION'
                   type='text'
                   onChange={handleChange}
-                  value={values.CATDESCRIPCION}
+                  value={values.CATDESCRIPCION.trim()}
                   isInvalid={errors.CATDESCRIPCION}
                 />
                 <Form.Control.Feedback type='invalid'>

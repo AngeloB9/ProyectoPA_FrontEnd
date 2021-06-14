@@ -7,12 +7,18 @@ const schema = yup.object().shape({
     .string()
     .matches(/^[0-9]{0,10}$/i, 'Es un campo numerico de hasta 10 digitos')
     .required('Campo requerido'),
-  CLINOMBRES: yup.string().required('Campo requerido'),
-  CLIAPELLIDOS: yup.string().required('Campo requerido'),
+  CLINOMBRES: yup
+    .string()
+    .matches(/^[aA-zZ\s]+$/, 'Por favor ingrese solo letras')
+    .required('Campo requerido'),
+  CLIAPELLIDOS: yup
+    .string()
+    .matches(/^[aA-zZ\s]+$/, 'Por favor ingrese solo letras')
+    .required('Campo requerido'),
   CLICORREO: yup.string().email('Correo inválido').required('Campo requerido'),
   CLICELULAR: yup
     .string()
-    .matches(/^09[8|9]{1}[0-9]{7}$/i, 'Formato incorrecto (ej: 0991234567)')
+    .matches(/^09[0-9]{8}$/i, 'Formato incorrecto (ej: 0991234567)')
     .required('Campo requerido'),
   CLIDIRECCION: yup.string().optional(),
 });

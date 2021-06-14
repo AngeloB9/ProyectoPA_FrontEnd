@@ -31,7 +31,7 @@ const CrearCategoria = ({ handleSubmit }) => {
                 <Form.Control
                   name='CATID'
                   type='text'
-                  placeholder='id'
+                  placeholder='cat00010'
                   isInvalid={errors.CATID}
                 />
                 <Form.Control.Feedback type='invalid'>

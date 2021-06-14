@@ -43,7 +43,7 @@ const EditarEmpleado = ({ handleSubmit, empleado }) => {
                 <Form.Control
                   name='EMPID'
                   type='text'
-                  edit='false'
+                  //edit='false'
                   onChange={handleChange}
                   value={values.EMPID}
                   isInvalid={errors.EMPID}
