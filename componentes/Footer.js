@@ -50,13 +50,15 @@ class Prueba extends Component {
                     <LinkedInIcon style={{ fontSize: 45 }} />
                   </a>
                 </td>
+
                 <td className='footiconF'>
                   <a
                     className='footLink text-reset text-decoration-none'
                     target='_blank'
                     href='https://www.instagram.com'
-                    rel='noopener noreferrer'></a>
-                  <InstagramIcon style={{ fontSize: 45 }} />
+                    rel='noopener noreferrer'>
+                    <InstagramIcon style={{ fontSize: 45 }} />
+                  </a>
                 </td>
                 <td className='footiconF'>
                   <a
@@ -93,10 +95,10 @@ class Prueba extends Component {
                       <li>
                         <a
                           className='footLink'
-                          href=''
+                          href='https://github.com/AngeloB9/ProyectoPA-Backend'
                           target='_blank'
                           rel='noopener noreferrer'>
-                          Backend - Proximamente
+                          Backend
                         </a>
                       </li>
                     </ul>
@@ -138,7 +140,7 @@ class Prueba extends Component {
               <tbody>
                 <tr>
                   <td>2021 © Tickets PA.</td>
-                  <td className='infoDerecha'>Whatsapp: +593 99 50 83 003</td>
+                  <td className='infoDerecha'>Programación Avanzada</td>
                 </tr>
               </tbody>
             </table>

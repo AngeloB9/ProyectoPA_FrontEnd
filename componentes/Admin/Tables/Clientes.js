@@ -68,7 +68,7 @@ export default function DataTable({ data, handleModalDelete }) {
   });
 
   return (
-    <div style={{ height: 400, width: '90%' }}>
+    <div style={{ height: 400, width: '100%' }}>
       <DataGrid rows={info} columns={columns} pageSize={5} checkboxSelection />
     </div>
   );

@@ -31,7 +31,7 @@ export default function DataTable({ data, handleModalDelete }) {
     {
       field: 'editar',
       headerName: 'Editar',
-      width: 200,
+      width: 150,
       disableClickEventBubbling: true,
       renderCell: (objeto) => {
         return (
@@ -44,7 +44,7 @@ export default function DataTable({ data, handleModalDelete }) {
     {
       field: 'eliminar',
       headerName: 'Eliminar',
-      width: 200,
+      width: 150,
       disableClickEventBubbling: true,
       renderCell: (objeto) => {
         return (
@@ -75,7 +75,7 @@ export default function DataTable({ data, handleModalDelete }) {
   });
 
   return (
-    <div style={{ height: 400, width: '90%' }}>
+    <div style={{ height: 400, width: '100%' }}>
       <DataGrid rows={info} columns={columns} pageSize={5} checkboxSelection />
     </div>
   );
