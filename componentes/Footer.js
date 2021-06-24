@@ -50,7 +50,6 @@ class Prueba extends Component {
                     <LinkedInIcon style={{ fontSize: 45 }} />
                   </a>
                 </td>
-
                 <td className='footiconF'>
                   <a
                     className='footLink text-reset text-decoration-none'
