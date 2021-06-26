@@ -23,7 +23,7 @@ const Hero = () => {
                 de las ordenes de trabajo de una empresa. Este proyecto esta
                 orientado a una empresa dedicada a dar soluciones gráficas
               </p>
-              <Link href='/admin/empleados'>
+              <Link href='/login'>
                 <a className='btn btn-warning'>
                   Ingresar al Sistema{' '}
                   <span className='ml-2 right-icon'>&#8594;</span>
